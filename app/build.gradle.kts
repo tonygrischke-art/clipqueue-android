@@ -1,8 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.dagger.hilt.android")
-    id("androidx.room")
+    id("com.google.dagger.hilt.android") version "2.51.1"
+    id("androidx.room") version "2.6.1"
 }
 
 android {
