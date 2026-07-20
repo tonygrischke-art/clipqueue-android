@@ -30,9 +30,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
 }
 
 dependencies {
@@ -58,6 +55,6 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.6.7")
     debugImplementation("androidx.compose.ui:ui-tooling:1.6.7")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.6.7")
-    implementation("com.google.dagger:hilt-compiler:2.51.1")
-    implementation("androidx.room:room-compiler:2.6.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    kapt("androidx.room:room-compiler:2.6.1")
 }
