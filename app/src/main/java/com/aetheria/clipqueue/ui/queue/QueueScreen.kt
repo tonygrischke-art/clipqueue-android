@@ -39,6 +39,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.aetheria.clipqueue.data.ClipboardItem
 import com.aetheria.clipqueue.data.ItemType
 import com.aetheria.clipqueue.ui.queue.QueueViewModel
+import com.aetheria.clipqueue.R
 import kotlinx.coroutines.flow.Flow
 
 @Composable
@@ -172,7 +173,7 @@ fun classifyItemType(text: String): ItemType {
     val urlPattern = """(https?://[\w.-]+(?:/[\w.-]*)*)""".toRegex()
     val emailPattern = """[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}""".toRegex()
     val phonePattern = """\+?[1-9][\d\s\-()]{7,}\d""".toRegex()
-    val codePattern = """^[\w\s{}()[\]<>;:,./\\\-+=*%&|~!@#\$^`]+\s*$""".toRegex()
+    val codePattern = """^[\w\s{}()[\]<>;:,./\-+=*%&|~!@#\$^`]+\s*$""".toRegex()
 
     return when {
         urlPattern.containsMatchIn(text) -> ItemType.URL
