@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.aetheria.clipqueue">
+
+    <application
+        android:name=".ClipQueueApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="ClipQueue"
+        android:theme="@style/Theme.ClipQueue">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="ClipQueue"
+            android:theme="@style/Theme.ClipQueue">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

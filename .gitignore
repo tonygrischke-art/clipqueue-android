@@ -1,0 +1,11 @@
+*.gradle
+*.iml
+*.ipr
+*.iws
+*.idea
+build/
+app/build/
+.gradle/
+local.properties
+.DS_Store
+
