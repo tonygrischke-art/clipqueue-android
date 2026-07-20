@@ -32,7 +32,7 @@ android {
         jvmTarget = "1.8"
     }
     room {
-        schemaDirectory("/schemas")
+        schemaDirectory("$projectDir/schemas")
     }
 }
 
