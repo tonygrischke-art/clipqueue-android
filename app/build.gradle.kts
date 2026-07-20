@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android") version "2.51.1"
     id("androidx.room") version "2.6.1"
+    id("kotlin-kapt")
 }
 
 android {
@@ -29,6 +30,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    room {
+        schemaDirectory("/schemas")
     }
 }
 
