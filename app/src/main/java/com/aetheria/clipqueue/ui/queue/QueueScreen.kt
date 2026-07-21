@@ -24,7 +24,9 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.lifecycleScope
 import androidx.compose.runtime.LaunchedEffect
+import kotlinx.coroutines.launch
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -62,14 +64,16 @@ fun QueueScreen(viewModel: QueueViewModel = viewModel()) {
         // Grab Clipboard Button
         Button(
             onClick = {
-                val clip = clipboardManager.primaryClip
-                if (clip != null && clip.getItemAt(0) != null) {
-                    val text = clip.getItemAt(0).text.toString()
-                    val itemType = classifyItemType(text)
-                    viewModel.addItem(text, itemType)
-                    Toast.makeText(context, "Added to queue", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "No clipboard content", Toast.LENGTH_SHORT).show()
+                lifecycleScope.launch {
+                    val clip = clipboardManager.primaryClip
+                    if (clip != null && clip.getItemAt(0) != null) {
+                        val text = clip.getItemAt(0).text.toString()
+                        val itemType = classifyItemType(text)
+                        viewModel.addItem(text, itemType)
+                        Toast.makeText(context, "Added to queue", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(context, "No clipboard content", Toast.LENGTH_SHORT).show()
+                    }
                 }
             },
             modifier = Modifier
@@ -84,7 +88,7 @@ fun QueueScreen(viewModel: QueueViewModel = viewModel()) {
 
         // Clear All Button
         Button(
-            onClick = { viewModel.clearAll() },
+            onClick = { lifecycleScope.launch { viewModel.clearAll() } },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 16.dp),
