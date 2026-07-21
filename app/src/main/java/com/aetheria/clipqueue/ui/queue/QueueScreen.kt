@@ -65,7 +65,7 @@ fun QueueScreen(viewModel: QueueViewModel = viewModel()) {
         // Grab Clipboard Button
         Button(
             onClick = {
-                rememberCoroutineScope().launch {
+                coroutineScope.launch {
                     val clip = clipboardManager.primaryClip
                     if (clip != null && clip.getItemAt(0) != null) {
                         val text = clip.getItemAt(0).text.toString()
@@ -89,7 +89,7 @@ fun QueueScreen(viewModel: QueueViewModel = viewModel()) {
 
         // Clear All Button
         Button(
-            onClick = { rememberCoroutineScope().launch { viewModel.clearAll() } },
+            onClick = { coroutineScope.launch { viewModel.clearAll() } },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 16.dp),
