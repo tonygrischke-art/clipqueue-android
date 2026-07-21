@@ -24,15 +24,14 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.lifecycleScope
 import androidx.compose.runtime.LaunchedEffect
-import kotlinx.coroutines.launch
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -43,6 +42,7 @@ import com.aetheria.clipqueue.data.ItemType
 import com.aetheria.clipqueue.ui.queue.QueueViewModel
 import com.aetheria.clipqueue.R
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
 @Composable
 fun QueueScreen(viewModel: QueueViewModel = viewModel()) {
@@ -64,7 +64,7 @@ fun QueueScreen(viewModel: QueueViewModel = viewModel()) {
         // Grab Clipboard Button
         Button(
             onClick = {
-                lifecycleScope.launch {
+                LocalLifecycleOwner.current.lifecycleScope.launch {
                     val clip = clipboardManager.primaryClip
                     if (clip != null && clip.getItemAt(0) != null) {
                         val text = clip.getItemAt(0).text.toString()
@@ -88,7 +88,7 @@ fun QueueScreen(viewModel: QueueViewModel = viewModel()) {
 
         // Clear All Button
         Button(
-            onClick = { lifecycleScope.launch { viewModel.clearAll() } },
+            onClick = { LocalLifecycleOwner.current.lifecycleScope.launch { viewModel.clearAll() } },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 16.dp),
