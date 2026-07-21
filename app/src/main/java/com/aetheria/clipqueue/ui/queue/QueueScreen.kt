@@ -27,11 +27,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -49,6 +49,7 @@ fun QueueScreen(viewModel: QueueViewModel = viewModel()) {
     val items by viewModel.getAllItems().collectAsState(initial = emptyList())
     val context = LocalContext.current
     val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val coroutineScope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -64,7 +65,7 @@ fun QueueScreen(viewModel: QueueViewModel = viewModel()) {
         // Grab Clipboard Button
         Button(
             onClick = {
-                LocalLifecycleOwner.current.lifecycleScope.launch {
+                rememberCoroutineScope().launch {
                     val clip = clipboardManager.primaryClip
                     if (clip != null && clip.getItemAt(0) != null) {
                         val text = clip.getItemAt(0).text.toString()
@@ -88,7 +89,7 @@ fun QueueScreen(viewModel: QueueViewModel = viewModel()) {
 
         // Clear All Button
         Button(
-            onClick = { LocalLifecycleOwner.current.lifecycleScope.launch { viewModel.clearAll() } },
+            onClick = { rememberCoroutineScope().launch { viewModel.clearAll() } },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 16.dp),
