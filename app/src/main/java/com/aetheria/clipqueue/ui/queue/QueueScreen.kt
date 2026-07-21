@@ -116,8 +116,7 @@ fun QueueScreen(viewModel: QueueViewModel = viewModel()) {
                         .fillMaxWidth()
                         .padding(8.dp)
                         .clickable {
-                            val clip = android.content.ClipData.newPlainText("", item.content)
-                            clipboardManager.primaryClip = clip
+                            clipboardManager.primaryClip = android.content.ClipData.newPlainText("", item.content)
                             Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show()
                         }
                         .background(
