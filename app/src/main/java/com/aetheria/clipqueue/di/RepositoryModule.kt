@@ -22,7 +22,7 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideClipQueueRepository(database: ClipQueueDatabase): ClipQueueRepository {
-        return ClipQueueRepository(database.context)
+    fun provideClipQueueRepository(@ApplicationContext context: Context): ClipQueueRepository {
+        return ClipQueueRepository(context)
     }
 }
